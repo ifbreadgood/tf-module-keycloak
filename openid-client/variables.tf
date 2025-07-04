@@ -24,6 +24,50 @@ variable "extra_configs" {
   default = {}
 }
 
+variable "standard_flow_enabled" {
+  type    = bool
+  default = true
+}
+
+variable "service_account_enabled" {
+  type    = bool
+  default = false
+}
+
+variable "oauth2_device_authorization_grant_enabled" {
+  type    = bool
+  default = false
+}
+
+variable "pkce_code_challenge_method" {
+  type    = string
+  default = "S256"
+  validation {
+    condition     = contains(["S256", "plain"], var.pkce_code_challenge_method)
+    error_message = "valid values are S256 and plain"
+  }
+}
+
+variable "valid_post_logout_redirect_uris" {
+  type    = list(string)
+  default = []
+}
+
+variable "web_origins" {
+  type    = list(string)
+  default = []
+}
+
+variable "root_url" {
+  type    = string
+  default = ""
+}
+
+variable "base_url" {
+  type    = string
+  default = ""
+}
+
 variable "KEYCLOAK_URL" {
   type = string
 }

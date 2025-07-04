@@ -6,20 +6,23 @@ resource "keycloak_openid_client" "this" {
   realm_id  = data.keycloak_realm.this.id
   client_id = var.client_id
 
-  name    = var.client_name
-  enabled = var.enabled
+  name                       = var.client_name
+  enabled                    = var.enabled
+  access_type                = "CONFIDENTIAL"
+  pkce_code_challenge_method = var.pkce_code_challenge_method
+  extra_config               = var.extra_configs
 
-  standard_flow_enabled    = true
-  service_accounts_enabled = true
-
+  standard_flow_enabled                     = var.standard_flow_enabled
+  service_accounts_enabled                  = var.service_account_enabled
   implicit_flow_enabled                     = false
   direct_access_grants_enabled              = false
-  oauth2_device_authorization_grant_enabled = false
+  oauth2_device_authorization_grant_enabled = var.oauth2_device_authorization_grant_enabled
 
-  access_type         = "CONFIDENTIAL"
-  valid_redirect_uris = var.valid_redirect_uris
-
-  extra_config = var.extra_configs
+  valid_redirect_uris             = var.valid_redirect_uris
+  valid_post_logout_redirect_uris = var.valid_post_logout_redirect_uris
+  web_origins                     = var.web_origins
+  root_url                        = var.root_url
+  base_url                        = var.base_url
 }
 
 # resource "keycloak_openid_client_service_account_role" "this" {
