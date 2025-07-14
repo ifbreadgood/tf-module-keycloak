@@ -68,8 +68,8 @@ variable "web_origins" {
 }
 
 variable "root_url" {
-  type    = string
-  default = ""
+  type    = list(string)
+  default = []
 }
 
 variable "base_url" {
