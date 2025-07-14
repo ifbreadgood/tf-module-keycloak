@@ -20,7 +20,7 @@ resource "keycloak_openid_client" "this" {
 
   valid_redirect_uris             = var.valid_redirect_uris
   valid_post_logout_redirect_uris = var.valid_post_logout_redirect_uris
-  web_origins                     = concat(var.root_url, var.web_origins)
+  web_origins                     = concat([var.root_url], var.web_origins)
   root_url                        = var.root_url
   base_url                        = var.base_url
 }
