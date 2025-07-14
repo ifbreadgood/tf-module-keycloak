@@ -8,7 +8,7 @@ resource "keycloak_openid_client" "this" {
 
   name                       = var.client_name
   enabled                    = var.enabled
-  access_type                = "CONFIDENTIAL"
+  access_type                = var.access_type
   pkce_code_challenge_method = var.pkce_code_challenge_method
   extra_config               = var.extra_configs
 
@@ -20,7 +20,7 @@ resource "keycloak_openid_client" "this" {
 
   valid_redirect_uris             = var.valid_redirect_uris
   valid_post_logout_redirect_uris = var.valid_post_logout_redirect_uris
-  web_origins                     = var.web_origins
+  web_origins                     = concat(var.root_url, var.web_origins)
   root_url                        = var.root_url
   base_url                        = var.base_url
 }

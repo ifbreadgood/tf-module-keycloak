@@ -15,6 +15,15 @@ variable "enabled" {
   default = true
 }
 
+variable "access_type" {
+  type = string
+  default = "CONFIDENTIAL"
+  validation {
+    condition = contains(["CONFIDENTIAL", "PUBLIC"], var.access_type)
+    error_message = "valid values are CONFIDENTIAL and PUBLIC"
+  }
+}
+
 variable "valid_redirect_uris" {
   type = set(string)
 }
